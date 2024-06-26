@@ -18,7 +18,7 @@ const getAlbumes = async (_, res) => {
             },
             ...
         ]
-    */
+    */qñeilwsbkfjdnlñ,KDLJFdkstrhiodjgkaejlnrg
 };
 
 const getAlbum = async (req, res) => {
