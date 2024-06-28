@@ -9,8 +9,21 @@ import canciones from "./controllers/canciones.js";
 app.use(express.json());
 
 app.get("/", (_, res) => {
+
+    console.log("a")
     res.send("SpoTICfy API working!");
 });
+
+app.get("/getalbumes",async (_, res) => {
+    const albu = await albumes.getAlbumes();
+    res.send(albu);
+});
+
+app.get("/album/:id",async (_, res) => {
+    const albu = await albumes.getAlbum();
+    res.send(albu);
+});
+
 
 /* ------------------- Rutas ------------------- */
 

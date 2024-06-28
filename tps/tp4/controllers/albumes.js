@@ -1,6 +1,7 @@
 import { conn } from "../db.js";
 
 const getAlbumes = async (_, res) => {
+<<<<<<< HEAD
     // Completar con la consulta que devuelve todos los albumes
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la siguiente forma:
@@ -19,6 +20,11 @@ const getAlbumes = async (_, res) => {
             ...
         ]
     */qñeilwsbkfjdnlñ,KDLJFdkstrhiodjgkaejlnrg
+=======
+    const albumes = await conn.query("SELECT * FROM albumes");
+    res = albumes;
+    return res
+>>>>>>> parent of 505c7e9 (Revert "comienzo (saber donde y como)")
 };
 
 const getAlbum = async (req, res) => {
@@ -32,6 +38,10 @@ const getAlbum = async (req, res) => {
             "nombre_artista": "Nombre del artista"
         }
     */
+   
+    const album = await conn.query("SELECT * FROM albumes WHERE id=?",req.params.id);
+    res = album;
+    return res
 };
 
 const createAlbum = async (req, res) => {
