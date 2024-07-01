@@ -1,5 +1,4 @@
 ### Obtener artistas
-
 GET http://localhost:3000/artistas HTTP/1.1
 
 ### Obtener un artista por id

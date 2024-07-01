@@ -14,13 +14,18 @@ app.get("/", (_, res) => {
     res.send("SpoTICfy API working!");
 });
 
-app.get("/getalbumes",async (_, res) => {
+app.get("/albumes",async (_, res) => {
     const albu = await albumes.getAlbumes();
     res.send(albu);
 });
 
-app.get("/albumes.getAlbum/:id",async (_, res) => {
-    const albu = await albumes.getAlbum();
+app.get("/albumes/:id",async (req, res) => {
+    const [albu] = await albumes.getAlbum(req.params.id);
+    res.send(albu);
+});
+
+app.post("/albumes",async (req, res) => {
+    let albu = await albumes.createAlbum(req.body);
     res.send(albu);
 });
 
