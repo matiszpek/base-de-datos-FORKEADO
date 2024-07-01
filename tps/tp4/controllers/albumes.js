@@ -1,30 +1,10 @@
 import { conn } from "../db.js";
 
 const getAlbumes = async (_, res) => {
-<<<<<<< HEAD
-    // Completar con la consulta que devuelve todos los albumes
-    // Recordar que los parámetros de una consulta GET se encuentran en req.params
-    // Deberían devolver los datos de la siguiente forma:
-    /*
-        [
-            {
-                "id": 1,
-                "nombre": "Nombre del album",
-                "nombre_artista": "Nombre del artista"
-            },
-            {
-                "id": 2,
-                "nombre": "Nombre del album",
-                "nombre_artista": "Nombre del artista"
-            },
-            ...
-        ]
-    */qñeilwsbkfjdnlñ,KDLJFdkstrhiodjgkaejlnrg
-=======
+
     const albumes = await conn.query("SELECT * FROM albumes");
     res = albumes;
     return res
->>>>>>> parent of 505c7e9 (Revert "comienzo (saber donde y como)")
 };
 
 const getAlbum = async (req, res) => {

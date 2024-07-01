@@ -19,7 +19,7 @@ app.get("/getalbumes",async (_, res) => {
     res.send(albu);
 });
 
-app.get("/album/:id",async (_, res) => {
+app.get("/albumes.getAlbum/:id",async (_, res) => {
     const albu = await albumes.getAlbum();
     res.send(albu);
 });
