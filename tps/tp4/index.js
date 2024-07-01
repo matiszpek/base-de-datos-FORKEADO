@@ -29,6 +29,16 @@ app.post("/albumes",async (req, res) => {
     res.send(albu);
 });
 
+app.get("/canciones",async (_, res) => {
+    const can = await canciones.getCanciones();
+    res.send(can);
+});
+app.get("/canciones/:id",async (req, res) => {
+    const [can] = await canciones.getCancion(req.params.id);
+    res.send(can);
+});
+
+
 
 /* ------------------- Rutas ------------------- */
 

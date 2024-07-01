@@ -17,6 +17,8 @@ const getArtistas = async (_, res) => {
             ...
         ]
     */
+        const [artistas] = await conn.query("SELECT * FROM artistas");
+        return artistas;
 };
 
 const getArtista = async (req, res) => {
@@ -29,6 +31,8 @@ const getArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
+   const[artista] = await conn.query("SELECT * FROM artistas WHERE id=?",[req.params.id]);
+   return artista;
 };
 
 const createArtista = async (req, res) => {
@@ -40,6 +44,8 @@ const createArtista = async (req, res) => {
             "nombre": "Nombre del artista",
         }
     */
+   const [result]= await conn.query("INSERT INTO artistas (nombre) VALUES (?)",[req.body.nombre]);
+   return result;
 };
 
 const updateArtista = async (req, res) => {
@@ -51,17 +57,23 @@ const updateArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
+    await conn.query('UPDATE artistas SET nombre=? WHERE id=?',[req.body.nombre,req.params.id]);
+
 };
 
 const deleteArtista = async (req, res) => {
     // Completar con la consulta que elimina un artista
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
+    const[result]= await conn.query("DELETE FROM artistas WHERE id=?",[req.params.id]);
+    return result;
 };
 
 const getAlbumesByArtista = async (req, res) => {
     // Completar con la consulta que devuelve las canciones de un artista
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getAlbumes
+    const[result]= await conn.query("SELECT * FROM albumes WHERE artista=?",[req.params.id]);
+    return result;
 };
 
 const getCancionesByArtista = async (req, res) => {
@@ -69,7 +81,9 @@ const getCancionesByArtista = async (req, res) => {
     // (tener en cuenta que las canciones están asociadas a un álbum, y los álbumes a un artista)
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getCanciones
-};
+    const [result] = await conn.query("SELECT canciones.* FROM canciones INNER JOIN albumes ON canciones.album=albumes.id WHERE albumes.artista=?",[req.params.id]);
+    return result;
+};  
 
 const artistas = {
     getArtistas,
