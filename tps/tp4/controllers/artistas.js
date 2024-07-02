@@ -18,7 +18,7 @@ const getArtistas = async (_, res) => {
         ]
     */
         const [artistas] = await conn.query("SELECT * FROM artistas");
-        return artistas;
+        res.json(artistas);
 };
 
 const getArtista = async (req, res) => {
@@ -32,9 +32,8 @@ const getArtista = async (req, res) => {
         }
     */
    const[artista] = await conn.query("SELECT * FROM artistas WHERE id=?",[req.params.id]);
-   return artista;
-};
-
+   res.json(artista[0]);
+}
 const createArtista = async (req, res) => {
     // Completar con la consulta que crea un artista
     // Recordar que los parámetros de una consulta POST se encuentran en req.body
@@ -45,7 +44,7 @@ const createArtista = async (req, res) => {
         }
     */
    const [result]= await conn.query("INSERT INTO artistas (nombre) VALUES (?)",[req.body.nombre]);
-   return result;
+   res.status(201).json(req.body);
 };
 
 const updateArtista = async (req, res) => {
@@ -57,15 +56,15 @@ const updateArtista = async (req, res) => {
             "nombre": "Nombre del artista"
         }
     */
-    await conn.query('UPDATE artistas SET nombre=? WHERE id=?',[req.body.nombre,req.params.id]);
-
+    const[result]= await conn.query('UPDATE artistas SET nombre=? WHERE id=?',[req.body.nombre,req.params.id]);
+    res.json(req.body);
 };
 
 const deleteArtista = async (req, res) => {
     // Completar con la consulta que elimina un artista
     // Recordar que los parámetros de una consulta DELETE se encuentran en req.params
     const[result]= await conn.query("DELETE FROM artistas WHERE id=?",[req.params.id]);
-    return result;
+    res.status(201);
 };
 
 const getAlbumesByArtista = async (req, res) => {
@@ -73,7 +72,7 @@ const getAlbumesByArtista = async (req, res) => {
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getAlbumes
     const[result]= await conn.query("SELECT * FROM albumes WHERE artista=?",[req.params.id]);
-    return result;
+    res.json(result);
 };
 
 const getCancionesByArtista = async (req, res) => {
@@ -82,7 +81,7 @@ const getCancionesByArtista = async (req, res) => {
     // Recordar que los parámetros de una consulta GET se encuentran en req.params
     // Deberían devolver los datos de la misma forma que getCanciones
     const [result] = await conn.query("SELECT canciones.* FROM canciones INNER JOIN albumes ON canciones.album=albumes.id WHERE albumes.artista=?",[req.params.id]);
-    return result;
+    res.json(result);
 };  
 
 const artistas = {
